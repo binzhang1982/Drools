@@ -1,0 +1,11 @@
+package plausibcheck.adress
+
+import com.secbro.drools.model.Address;
+import com.secbro.drools.model.fact.AddressCheckResult;
+
+rule "Postcode 6 numbers"
+
+    when
+    then
+		System.out.println("logs in rule temp ：check success!");
+end
