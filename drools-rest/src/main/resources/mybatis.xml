@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<properties>
+		<!-- <property name="dialect" value="mysql" />
+		<property name="dialect" value="oracle" /> -->
+	</properties>
+
+	<!--表明重用预编译的SQL语句 -->
+	<settings>
+		<setting name="defaultExecutorType" value="REUSE" />
+	</settings>
+	<!--类型别名定义。今后可只用Student来代替它冗长的 全限定名 -->
+	<!-- <typeAliases>
+		<typeAlias alias="SysUser" type="com.hp.ciic.system.po.SysUser" />
+	</typeAliases> -->
+
+	<!--<plugins>-->
+		<!--<plugin interceptor="com.ciicsh.common.mybatis.interceptor.PaginationInterceptor">-->
+			<!--<property name="dialect" value="postgresql" />-->
+		<!--</plugin>-->
+	<!--</plugins>-->
+
+	<!--environments可包含多个environment元素。 每个environment配置与数据库交互的细节，这里 只需要配置一个。default属性是指在创建SqlSessionFactory 
+		时，若没有明确指定要用哪个environment，则使用此 属性指定的 -->
+	<!--使用连接池的数据源配置 -->
+	<!-- <environments default="development">
+		<environment id="development">
+			<transactionManager type="jdbc" />
+			<dataSource type="POOLED">
+				<property name="driver value="com.mysql.jdbc.Driver" />
+				<property name="url" value="jdbc:mysql://localhost/courseman" />
+				<property name="username" value="courseman" />
+				<property name="password" value="abc123" />
+			</dataSource>
+		</environment>
+	</environments> -->
+	<!--指定要用到的mapper文件。以下的resource属性告诉 MyBatis要在类路径下的resources目录下找StudentMapper.xml文件。我们将把mapper文件存放在src目录下的resources目录中，并让ant把resources目录拷贝到classes中，而classes目录会被ant添加到类路径中。 -->
+	<!-- <mappers>   由Spring 自动扫描装配，映射类和映射配置文件放在同一个目录
+		<mapperresource = "system/mapper/SysUserMapper.xml" />
+	</mappers> -->
+
+	<typeAliases>
+		<package name="com.zbin.drools.entity"></package>
+	</typeAliases>
+</configuration>

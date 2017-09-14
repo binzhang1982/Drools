@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+<log4j:configuration threshold="debug"
+	xmlns:log4j='http://jakarta.apache.org/log4j/'>
+	<appender name="CONSOLE" class="org.apache.log4j.ConsoleAppender">
+		<param name="threshold" value="DEBUG" />
+		<param name="encoding" value="UFT-8" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%-d{yyyy-MM-dd HH:mm:ss,SSS} [%c]-[%p] %m%n" />
+			<!-- <param name="ConversionPattern" value="%d{HH:mm:ss}[%C.%M(%L)-%p] %m%n"/> -->
+		</layout>
+		<!--过滤器设置输出的级别 -->
+		<filter class="org.apache.log4j.varia.LevelRangeFilter">
+			<param name="levelMin" value="DEBUG" />
+			<param name="levelMax" value="ERROR" />
+			<param name="AcceptOnMatch" value="true" />
+		</filter>
+	</appender>
+	<appender name="ERROR_FILE" class="org.apache.log4j.RollingFileAppender">
+		<param name="threshold" value="ERROR" />
+		<param name="file" value="ciic-error.log" />
+		<param name="maxFileSize" value="5MB" />
+		<param name="maxBackupIndex" value="10" />
+		<param name="append" value="true" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%-d{yyyy-MM-dd HH:mm:ss.SSS} [%p]-[%c] %m%n" />
+		</layout>
+		<!--过滤器设置输出的级别 -->
+		<filter class="org.apache.log4j.varia.LevelRangeFilter">
+			<param name="levelMin" value="INFO" />
+			<param name="levelMax" value="ERROR" />
+			<param name="AcceptOnMatch" value="true" />
+		</filter>
+	</appender>
+	<appender name="ERROR_FILE" class="org.apache.log4j.RollingFileAppender">
+		<param name="threshold" value="DEBUG" />
+		<param name="file" value="ciic-debug.log" />
+		<param name="maxFileSize" value="100MB" />
+		<param name="maxBackupIndex" value="10" />
+		<param name="append" value="true" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%-d{yyyy-MM-dd HH:mm:ss.SSS} [%p]-[%c] %m%n" />
+		</layout>
+	</appender>
+	<!-- <appender name="DEBUG_FILE" class="org.apache.log4j.DailyRollingFileAppender">
+		<param name="threshold" value="DEBUG" />
+		<param name="file" value="ciic-debug.log" />
+		<param name="append" value="true" />
+		<param name="datePattern" value="'.'yyyy-MM-dd" />
+		each hour <param name="DatePattern" value="'.'yyyy-MM-dd-HH"/>
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%d %-5p [%c] %m%n" />
+		</layout>
+	</appender> -->
+	
+	<!-- 指定category的设置，additivity指示是否遵循缺省的Appender叠加机制。category和logger标签等同 -->
+	<!-- <category name="com.ciicsh.project" additivity="true">
+		<priority value="DEBUG" />
+	</category>
+	<category name="com.ciicsh.project.mapper.ProjectInfoMapper.insert" additivity="true">
+		<priority value="OFF" />
+	</category> -->
+	<category name="org.apache.ibatis" additivity="true">
+		<priority value="DEBUG" />
+	</category>
+	<!-- <category name="org.mybatis" additivity="true">
+		<priority value="DEBUG" />
+	</category>
+	<category name="java.sql" additivity="true">
+		<priority value="DEBUG" />
+	</category>
+	<category name="com.mchange.v2.c3p0" additivity="true">
+		<priority value="DEBUG"/>
+	</category> -->
+	<category name="com.ciicsh" additivity="true">
+		<priority value="DEBUG" />
+	</category>
+
+	<!-- 根logger的设置 -->
+	<root>
+		<!-- <level value="DEBUG" /> -->
+		<priority value="DEBUG" />
+		<appender-ref ref="CONSOLE" />
+		<appender-ref ref="ERROR_FILE" />
+		<appender-ref ref="DEBUG_FILE" />
+	</root>
+</log4j:configuration>

@@ -1,0 +1,338 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zbin.drools.mapper.CoachInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.zbin.drools.entity.CoachInfo" >
+    <id column="phonenum" property="phonenum" jdbcType="CHAR" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="token" property="token" jdbcType="VARCHAR" />
+    <result column="password" property="password" jdbcType="VARCHAR" />
+    <result column="level_id" property="levelId" jdbcType="INTEGER" />
+    <result column="sex_id" property="sexId" jdbcType="INTEGER" />
+    <result column="email" property="email" jdbcType="VARCHAR" />
+    <result column="icon_url" property="iconUrl" jdbcType="VARCHAR" />
+    <result column="stars" property="stars" jdbcType="INTEGER" />
+    <result column="introduce" property="introduce" jdbcType="VARCHAR" />
+    <result column="access_time" property="accessTime" jdbcType="TIMESTAMP" />
+    <result column="isadmin" property="isadmin" jdbcType="SMALLINT" />
+    <result column="isapprovaled" property="isapprovaled" jdbcType="SMALLINT" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    phonenum, name, token, password, level_id, sex_id, email, icon_url, stars, introduce, 
+    access_time, isadmin, isapprovaled
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.zbin.drools.entity.CoachInfoExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from talk.coachinfo
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from talk.coachinfo
+    where phonenum = #{phonenum,jdbcType=CHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from talk.coachinfo
+    where phonenum = #{phonenum,jdbcType=CHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.zbin.drools.entity.CoachInfoExample" >
+    delete from talk.coachinfo
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.zbin.drools.entity.CoachInfo" >
+    insert into talk.coachinfo (phonenum, name, token, 
+      password, level_id, sex_id, 
+      email, icon_url, stars, 
+      introduce, access_time, isadmin, 
+      isapprovaled)
+    values (#{phonenum,jdbcType=CHAR}, #{name,jdbcType=VARCHAR}, #{token,jdbcType=VARCHAR}, 
+      #{password,jdbcType=VARCHAR}, #{levelId,jdbcType=INTEGER}, #{sexId,jdbcType=INTEGER}, 
+      #{email,jdbcType=VARCHAR}, #{iconUrl,jdbcType=VARCHAR}, #{stars,jdbcType=INTEGER}, 
+      #{introduce,jdbcType=VARCHAR}, #{accessTime,jdbcType=TIMESTAMP}, #{isadmin,jdbcType=SMALLINT}, 
+      #{isapprovaled,jdbcType=SMALLINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zbin.drools.entity.CoachInfo" >
+    insert into talk.coachinfo
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="phonenum != null" >
+        phonenum,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="token != null" >
+        token,
+      </if>
+      <if test="password != null" >
+        password,
+      </if>
+      <if test="levelId != null" >
+        level_id,
+      </if>
+      <if test="sexId != null" >
+        sex_id,
+      </if>
+      <if test="email != null" >
+        email,
+      </if>
+      <if test="iconUrl != null" >
+        icon_url,
+      </if>
+      <if test="stars != null" >
+        stars,
+      </if>
+      <if test="introduce != null" >
+        introduce,
+      </if>
+      <if test="accessTime != null" >
+        access_time,
+      </if>
+      <if test="isadmin != null" >
+        isadmin,
+      </if>
+      <if test="isapprovaled != null" >
+        isapprovaled,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="phonenum != null" >
+        #{phonenum,jdbcType=CHAR},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="token != null" >
+        #{token,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="levelId != null" >
+        #{levelId,jdbcType=INTEGER},
+      </if>
+      <if test="sexId != null" >
+        #{sexId,jdbcType=INTEGER},
+      </if>
+      <if test="email != null" >
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="iconUrl != null" >
+        #{iconUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="stars != null" >
+        #{stars,jdbcType=INTEGER},
+      </if>
+      <if test="introduce != null" >
+        #{introduce,jdbcType=VARCHAR},
+      </if>
+      <if test="accessTime != null" >
+        #{accessTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isadmin != null" >
+        #{isadmin,jdbcType=SMALLINT},
+      </if>
+      <if test="isapprovaled != null" >
+        #{isapprovaled,jdbcType=SMALLINT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.zbin.drools.entity.CoachInfoExample" resultType="java.lang.Integer" >
+    select count(*) from talk.coachinfo
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update talk.coachinfo
+    <set >
+      <if test="record.phonenum != null" >
+        phonenum = #{record.phonenum,jdbcType=CHAR},
+      </if>
+      <if test="record.name != null" >
+        name = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.token != null" >
+        token = #{record.token,jdbcType=VARCHAR},
+      </if>
+      <if test="record.password != null" >
+        password = #{record.password,jdbcType=VARCHAR},
+      </if>
+      <if test="record.levelId != null" >
+        level_id = #{record.levelId,jdbcType=INTEGER},
+      </if>
+      <if test="record.sexId != null" >
+        sex_id = #{record.sexId,jdbcType=INTEGER},
+      </if>
+      <if test="record.email != null" >
+        email = #{record.email,jdbcType=VARCHAR},
+      </if>
+      <if test="record.iconUrl != null" >
+        icon_url = #{record.iconUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.stars != null" >
+        stars = #{record.stars,jdbcType=INTEGER},
+      </if>
+      <if test="record.introduce != null" >
+        introduce = #{record.introduce,jdbcType=VARCHAR},
+      </if>
+      <if test="record.accessTime != null" >
+        access_time = #{record.accessTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.isadmin != null" >
+        isadmin = #{record.isadmin,jdbcType=SMALLINT},
+      </if>
+      <if test="record.isapprovaled != null" >
+        isapprovaled = #{record.isapprovaled,jdbcType=SMALLINT},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update talk.coachinfo
+    set phonenum = #{record.phonenum,jdbcType=CHAR},
+      name = #{record.name,jdbcType=VARCHAR},
+      token = #{record.token,jdbcType=VARCHAR},
+      password = #{record.password,jdbcType=VARCHAR},
+      level_id = #{record.levelId,jdbcType=INTEGER},
+      sex_id = #{record.sexId,jdbcType=INTEGER},
+      email = #{record.email,jdbcType=VARCHAR},
+      icon_url = #{record.iconUrl,jdbcType=VARCHAR},
+      stars = #{record.stars,jdbcType=INTEGER},
+      introduce = #{record.introduce,jdbcType=VARCHAR},
+      access_time = #{record.accessTime,jdbcType=TIMESTAMP},
+      isadmin = #{record.isadmin,jdbcType=SMALLINT},
+      isapprovaled = #{record.isapprovaled,jdbcType=SMALLINT}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zbin.drools.entity.CoachInfo" >
+    update talk.coachinfo
+    <set >
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="token != null" >
+        token = #{token,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="levelId != null" >
+        level_id = #{levelId,jdbcType=INTEGER},
+      </if>
+      <if test="sexId != null" >
+        sex_id = #{sexId,jdbcType=INTEGER},
+      </if>
+      <if test="email != null" >
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="iconUrl != null" >
+        icon_url = #{iconUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="stars != null" >
+        stars = #{stars,jdbcType=INTEGER},
+      </if>
+      <if test="introduce != null" >
+        introduce = #{introduce,jdbcType=VARCHAR},
+      </if>
+      <if test="accessTime != null" >
+        access_time = #{accessTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isadmin != null" >
+        isadmin = #{isadmin,jdbcType=SMALLINT},
+      </if>
+      <if test="isapprovaled != null" >
+        isapprovaled = #{isapprovaled,jdbcType=SMALLINT},
+      </if>
+    </set>
+    where phonenum = #{phonenum,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zbin.drools.entity.CoachInfo" >
+    update talk.coachinfo
+    set name = #{name,jdbcType=VARCHAR},
+      token = #{token,jdbcType=VARCHAR},
+      password = #{password,jdbcType=VARCHAR},
+      level_id = #{levelId,jdbcType=INTEGER},
+      sex_id = #{sexId,jdbcType=INTEGER},
+      email = #{email,jdbcType=VARCHAR},
+      icon_url = #{iconUrl,jdbcType=VARCHAR},
+      stars = #{stars,jdbcType=INTEGER},
+      introduce = #{introduce,jdbcType=VARCHAR},
+      access_time = #{accessTime,jdbcType=TIMESTAMP},
+      isadmin = #{isadmin,jdbcType=SMALLINT},
+      isapprovaled = #{isapprovaled,jdbcType=SMALLINT}
+    where phonenum = #{phonenum,jdbcType=CHAR}
+  </update>
+</mapper>
